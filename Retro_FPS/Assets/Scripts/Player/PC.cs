@@ -14,7 +14,6 @@ public class PC : MonoBehaviour {
 	public float airAcceleration = 10f;
 
 	[Header ("Shared")]
-	public Vector3 moveScale;
 	public float gravity = 9.83f;
 
 	[Header ("Camera")]
@@ -25,6 +24,8 @@ public class PC : MonoBehaviour {
 
 	[Header ("Movement Vars")]
 	public Vector3 velocity;
+	public Vector3 moveScale;
+	public Vector3 wishDir;
 
 	[Header ("Options")]
 	public bool hideCursor = true;
@@ -61,17 +62,23 @@ public class PC : MonoBehaviour {
 
 	void Accelerate() {
 		// Calculate move scale
-		moveScale += PlayerInput.GetMovementInput() * acceleration * Time.deltaTime;
-		//moveScale.x = Mathf.Clamp (moveScale.x, -1, 1);
-		//moveScale.z = Mathf.Clamp (moveScale.z, -1, 1);
-		velocity += transform.TransformDirection (moveScale.normalized) * moveSpeed;
-		velocity.x = Mathf.Clamp (velocity.x, -moveSpeed, moveSpeed);
-		velocity.z = Mathf.Clamp (velocity.z, -moveSpeed, moveSpeed);
+		wishDir = PlayerInput.GetMovementInput() * acceleration * Time.deltaTime;
+		wishDir.x = Mathf.Clamp (wishDir.x, -1f, 1f);
+		wishDir.z = Mathf.Clamp (wishDir.z, -1f, 1f);
+
+		moveScale.x = Mathf.MoveTowards (moveScale.x, wishDir.x * moveSpeed, acceleration * Time.deltaTime);
+		moveScale.z = Mathf.MoveTowards (moveScale.z, wishDir.z * moveSpeed, acceleration * Time.deltaTime);
+		velocity = transform.TransformDirection (moveScale);
+
+		//velocity.x = Mathf.Clamp (velocity.x, -moveSpeed, moveSpeed);
+		//velocity.z = Mathf.Clamp (velocity.z, -moveSpeed, moveSpeed);
 	}
 
 	public void Deaccelerate() {
-		moveScale.x = Mathf.MoveTowards (moveScale.x, 0, deacceleration * Time.deltaTime);
-		moveScale.z = Mathf.MoveTowards (moveScale.z, 0, deacceleration * Time.deltaTime);
+		//moveScale.x = Mathf.MoveTowards (moveScale.x, 0, deacceleration * Time.deltaTime);
+		//moveScale.z = Mathf.MoveTowards (moveScale.z, 0, deacceleration * Time.deltaTime);
+		//velocity.x = Mathf.MoveTowards (velocity.x, 0, deacceleration * Time.deltaTime);
+		//velocity.z = Mathf.MoveTowards (velocity.z, 0, deacceleration * Time.deltaTime);
 	}
 
 	void ApplyVelocity() {

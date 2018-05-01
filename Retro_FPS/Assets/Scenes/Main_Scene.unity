@@ -3213,6 +3213,16 @@ Prefab:
       propertyPath: crouchViewPosition.y
       value: 0.15
       objectReference: {fileID: 0}
+    - target: {fileID: 114978693959355360, guid: 0328f6573f8b4dd4d80922631b3150cb,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114561428811037374, guid: 0328f6573f8b4dd4d80922631b3150cb,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0328f6573f8b4dd4d80922631b3150cb, type: 2}
   m_IsPrefabParent: 0

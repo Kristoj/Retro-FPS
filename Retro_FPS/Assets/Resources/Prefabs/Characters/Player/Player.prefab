@@ -290,7 +290,7 @@ MonoBehaviour:
   isActive: 1
   mouseSensitivity: 70
   defaultViewPosition: {x: 0, y: 0.6, z: 0}
-  crouchViewPosition: {x: 0, y: 0.3, z: 0}
+  crouchViewPosition: {x: 0, y: 0.15, z: 0}
   viewPosition: {x: 0, y: 0, z: 0}
   camEuler: {x: 0, y: 0, z: 0}
   recoilEuler: {x: 0, y: 0, z: 0}

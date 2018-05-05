@@ -69,22 +69,17 @@ public class PC : MonoBehaviour {
 		moveScale.x = Mathf.MoveTowards (moveScale.x, wishDir.x * moveSpeed, acceleration * Time.deltaTime);
 		moveScale.z = Mathf.MoveTowards (moveScale.z, wishDir.z * moveSpeed, acceleration * Time.deltaTime);
 		velocity = transform.TransformDirection (moveScale);
-
-		//velocity.x = Mathf.Clamp (velocity.x, -moveSpeed, moveSpeed);
-		//velocity.z = Mathf.Clamp (velocity.z, -moveSpeed, moveSpeed);
 	}
 
 	public void Deaccelerate() {
-		//moveScale.x = Mathf.MoveTowards (moveScale.x, 0, deacceleration * Time.deltaTime);
-		//moveScale.z = Mathf.MoveTowards (moveScale.z, 0, deacceleration * Time.deltaTime);
-		//velocity.x = Mathf.MoveTowards (velocity.x, 0, deacceleration * Time.deltaTime);
-		//velocity.z = Mathf.MoveTowards (velocity.z, 0, deacceleration * Time.deltaTime);
+		
 	}
 
 	void ApplyVelocity() {
 		controller.Move (velocity * Time.deltaTime);
 	}
 
+	// Camera rotation
 	void CameraRotation() {
 		// Add input
 		camEuler.x -= PlayerInput.GetMouseInput().y;
@@ -98,6 +93,7 @@ public class PC : MonoBehaviour {
 		transform.localRotation = Quaternion.Euler (new Vector3 (0, camEuler.y, 0));
 	}
 
+	// Jump
 	void Jump() {
 		moveScale.y = jumpHeight * Time.fixedDeltaTime;
 	}

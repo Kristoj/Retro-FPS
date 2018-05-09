@@ -317,7 +317,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &321270341
 Transform:
   m_ObjectHideFlags: 0
@@ -890,7 +890,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh12022
+  m_Name: pb_Mesh12890
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -3207,16 +3207,6 @@ Prefab:
     - target: {fileID: 4743131902853574, guid: 0328f6573f8b4dd4d80922631b3150cb, type: 2}
       propertyPath: m_RootOrder
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114978693959355360, guid: 0328f6573f8b4dd4d80922631b3150cb,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114561428811037374, guid: 0328f6573f8b4dd4d80922631b3150cb,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0328f6573f8b4dd4d80922631b3150cb, type: 2}

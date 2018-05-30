@@ -24,7 +24,6 @@ public class PC : MonoBehaviour {
 
 	[Header ("Movement Vars")]
 	public Vector3 velocity;
-	public Vector3 moveScale;
 	public Vector3 wishDir;
 
 	[Header ("Options")]
@@ -62,17 +61,21 @@ public class PC : MonoBehaviour {
 
 	void Accelerate() {
 		// Calculate move scale
-		wishDir = PlayerInput.GetMovementInput() * acceleration * Time.deltaTime;
-		wishDir.x = Mathf.Clamp (wishDir.x, -1f, 1f);
-		wishDir.z = Mathf.Clamp (wishDir.z, -1f, 1f);
+		Vector3 inputDir = transform.TransformDirection (PlayerInput.GetMovementInput().normalized);
 
-		moveScale.x = Mathf.MoveTowards (moveScale.x, wishDir.x * moveSpeed, acceleration * Time.deltaTime);
-		moveScale.z = Mathf.MoveTowards (moveScale.z, wishDir.z * moveSpeed, acceleration * Time.deltaTime);
-		velocity = transform.TransformDirection (moveScale);
+
+			wishDir.x = Mathf.Lerp (wishDir.x, inputDir.x, acceleration * Time.deltaTime);
+
+			wishDir.z = Mathf.Lerp (wishDir.z, inputDir.z, acceleration * Time.deltaTime);
+
+		velocity = new Vector3 (wishDir.x, velocity.y, wishDir.z) * moveSpeed;
 	}
 
 	public void Deaccelerate() {
-		
+		if (PlayerInput.GetMovementInput().x == 0)
+			velocity.x = Mathf.Lerp (velocity.x, 0, deacceleration * Time.deltaTime);
+		if (PlayerInput.GetMovementInput().z == 0)
+			velocity.z = Mathf.Lerp (velocity.z, 0, deacceleration * Time.deltaTime);
 	}
 
 	void ApplyVelocity() {
@@ -95,7 +98,7 @@ public class PC : MonoBehaviour {
 
 	// Jump
 	void Jump() {
-		moveScale.y = jumpHeight * Time.fixedDeltaTime;
+		velocity.y = jumpHeight * Time.fixedDeltaTime;
 	}
 
 	void ApplyGravity() {
@@ -104,9 +107,9 @@ public class PC : MonoBehaviour {
 		if (controller.isGrounded) {
 			gravityScale = 0;
 		}
-
-		moveScale.y -= gravity * Time.deltaTime * gravityScale;
-		moveScale.y = Mathf.Clamp (moveScale.y, -50, 100);
+		gravityScale = 1f;
+		velocity.y -= gravity * Time.deltaTime * gravityScale;
+		velocity.y = Mathf.Clamp (velocity.y, -50, 100);
 	}
 
 	// Check for player input
